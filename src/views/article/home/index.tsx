@@ -3,10 +3,10 @@ import {View, Text, Button, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
-import {RootStackParamList} from '../../../App';
+import {RootStackParamList} from '@/App';
 
-type NavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
-type ScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
+type NavigationProp = StackNavigationProp<RootStackParamList, 'ArticleHome'>;
+type ScreenRouteProp = RouteProp<RootStackParamList, 'ArticleDetail'>;
 
 interface HomeProps {
   navigation: NavigationProp;
@@ -28,7 +28,7 @@ const Home: FC<HomeProps> = ({navigation, route}) => {
       <Text>Hello wolrd</Text>
       <Text>id from detail: {idFromDetail}</Text>
       <Button
-        onPress={() => navigation.navigate('Detail', {id: 11233})}
+        onPress={() => navigation.navigate('ArticleDetail', {id: 11233})}
         title="Go Detail"
       />
     </View>
