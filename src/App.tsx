@@ -1,33 +1,14 @@
 import React, {useReducer, useMemo} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
 
 import {StorageKey} from '@/type';
 import type {IAuthContext} from '@/utils/context';
 import {AuthContext} from '@/utils/context';
-import {SignInScreen, SignUpScreen, SplachScreen} from '@/views/user';
-import {ArticleHomeScreen, ArticleDetailScreen} from '@/views/article/index';
+import MainStackScreen from '@/router/mainStackScreen';
+import AuthStackScreen from '@/router/authStackScreen';
+import {SplachScreen} from '@/views/user';
 import {sleep} from '@/utils';
-
-export type RootStackParamList = {
-  ArticleHome:
-    | {
-        /** 从 detail 返回时获取的 id */
-        id?: number;
-      }
-    | undefined;
-  ArticleDetail: {
-    /** 文章的 id */
-    id: number;
-  };
-  SignIn: undefined;
-  SignUp: undefined;
-  AutoSignIn: undefined;
-};
-
-const Stack = createStackNavigator<RootStackParamList>();
-
 interface AuthState {
   userToken: string | undefined;
   isSignout: boolean;
@@ -84,7 +65,6 @@ function App() {
     // Fetch the token from storage then navigate to our appropriate place
     const bootstrapAsync = async () => {
       let userToken;
-
       try {
         userToken = await AsyncStorage.getItem(StorageKey.userToken);
       } catch (e) {
@@ -92,6 +72,8 @@ function App() {
       }
 
       // After restoring token, we may need to validate it in production apps
+
+      await sleep(2000);
 
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
@@ -119,7 +101,10 @@ function App() {
         });
         return Promise.resolve();
       },
-      signOut: () => dispatch({type: 'SIGN_OUT', payload: undefined}),
+      signOut: async () => {
+        await AsyncStorage.removeItem(StorageKey.userToken);
+        dispatch({type: 'SIGN_OUT', payload: undefined});
+      },
       signUp: async (userName, password) => {
         // In a production app, we need to send user data to server and get a token
         // We will also need to handle errors if sign up failed
@@ -141,36 +126,7 @@ function App() {
   return (
     <AuthContext.Provider value={authContext}>
       <NavigationContainer>
-        <Stack.Navigator>
-          {!authState.userToken ? (
-            <>
-              <Stack.Screen name="SignIn" component={SignInScreen} />
-              <Stack.Screen name="SignUp" component={SignUpScreen} />
-            </>
-          ) : (
-            <>
-              <Stack.Screen
-                name="ArticleHome"
-                options={{
-                  title: 'Home_',
-                }}
-                component={ArticleHomeScreen}
-              />
-              <Stack.Screen
-                name="ArticleDetail"
-                initialParams={{
-                  id: 233,
-                }}
-                options={({route}) => {
-                  return {
-                    title: `Detail-${route.params.id}`,
-                  };
-                }}
-                component={ArticleDetailScreen}
-              />
-            </>
-          )}
-        </Stack.Navigator>
+        {!authState.userToken ? <AuthStackScreen /> : <MainStackScreen />}
       </NavigationContainer>
     </AuthContext.Provider>
   );

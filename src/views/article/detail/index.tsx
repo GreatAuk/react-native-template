@@ -3,10 +3,15 @@ import {View, Text, Button, StyleSheet, Alert} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
-import {RootStackParamList} from '@/App';
+import {MainStackParamList} from '@/router/mainStackScreen';
 
-type NavigationProp = StackNavigationProp<RootStackParamList, 'ArticleDetail'>;
-type ScreenRouteProp = RouteProp<RootStackParamList, 'ArticleDetail'>;
+type NavigationProp = StackNavigationProp<MainStackParamList, 'ArticleDetail'>;
+type ScreenRouteProp = RouteProp<MainStackParamList, 'ArticleDetail'>;
+
+export type ArticleDetailScreenParams = {
+  /** 文章的 id */
+  id: number;
+};
 
 interface DetailProps {
   navigation: NavigationProp;
@@ -34,6 +39,10 @@ const Detail: FC<DetailProps> = ({navigation, route}) => {
           });
         }}
         title="Set Title Test"
+      />
+      <Button
+        onPress={() => navigation.navigate('MessageDetail')}
+        title="Go MessageDetail"
       />
       <Button
         onPress={() => navigation.navigate('ArticleHome', {id})}
