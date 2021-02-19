@@ -39,7 +39,7 @@ const Home: FC<HomeProps> = ({navigation, route}) => {
         title="Go Article Detail"
       />
       <Button
-        onPress={() => navigation.navigate('MessageList')}
+        onPress={() => navigation.navigate('MessageHome')}
         title="Go 『Message』 List"
       />
       <Button

@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
+import {NavigatorScreenParams} from '@react-navigation/native';
 
 import type {
   ArticleHomeScreenParams,
   ArticleDetailScreenParams,
 } from '@/views/article';
-import BottomTabScreen from '@/router/bottomTabScreen';
+import BottomTabScreen, {TabParamList} from '@/router/bottomTabScreen';
 import {ArticleHomeScreen, ArticleDetailScreen} from '@/views/article';
-import {MessageListScreen, MessageDetailScreen} from '@/views/message';
+import {MessageDetailScreen} from '@/views/message';
 
 export type MainStackParamList = {
   BottomTabScreen: undefined;
@@ -15,7 +16,7 @@ export type MainStackParamList = {
   ArticleDetail: ArticleDetailScreenParams;
   MessageList: undefined;
   MessageDetail: undefined;
-};
+} & TabParamList;
 
 const MainStack = createStackNavigator<MainStackParamList>();
 
@@ -45,7 +46,6 @@ const MainStackScreen = () => {
         }}
         component={ArticleDetailScreen}
       />
-      <MainStack.Screen name="MessageList" component={MessageListScreen} />
       <MainStack.Screen name="MessageDetail" component={MessageDetailScreen} />
     </MainStack.Navigator>
   );

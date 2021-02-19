@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {View, Text, Button, StyleSheet, StatusBar} from 'react-native';
+import {View, Text, Button, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import FocusAwareStatusBar from '@/components/FocusAwareStatusBar';
