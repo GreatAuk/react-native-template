@@ -49,6 +49,10 @@ const Home: FC<HomeProps> = ({navigation, route}) => {
         onPress={() => navigation.navigate('MessageDetail')}
         title="Go 『Message』 Detail"
       />
+      <Button
+        onPress={() => navigation.navigate('MobxTest1')}
+        title="Go MobxTest1"
+      />
     </View>
   );
 };

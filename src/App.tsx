@@ -3,6 +3,7 @@ import {useColorScheme} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 
+import store, {StoreContext} from '@/store';
 import {DefaultTheme, DarkTheme} from '@/theme';
 import {StorageKey} from '@/type';
 import type {IAuthContext} from '@/utils/context';
@@ -11,6 +12,7 @@ import MainStackScreen from '@/router/mainStackScreen';
 import AuthStackScreen from '@/router/authStackScreen';
 import {SplachScreen} from '@/views/user';
 import {sleep} from '@/utils';
+
 interface AuthState {
   userToken: string | undefined;
   isSignout: boolean;
@@ -127,12 +129,14 @@ function App() {
     return <SplachScreen />;
   }
   return (
-    <AuthContext.Provider value={authContext}>
-      <NavigationContainer
-        theme={colorScheme === 'light' ? DefaultTheme : DarkTheme}>
-        {!authState.userToken ? <AuthStackScreen /> : <MainStackScreen />}
-      </NavigationContainer>
-    </AuthContext.Provider>
+    <StoreContext.Provider value={store}>
+      <AuthContext.Provider value={authContext}>
+        <NavigationContainer
+          theme={colorScheme === 'light' ? DefaultTheme : DarkTheme}>
+          {!authState.userToken ? <AuthStackScreen /> : <MainStackScreen />}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </StoreContext.Provider>
   );
 }
 

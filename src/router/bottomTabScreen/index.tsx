@@ -18,6 +18,7 @@ const BottomTabs = createBottomTabNavigator<TabParamList>();
 export default function BottomTabScreen() {
   return (
     <BottomTabs.Navigator
+      lazy={false}
       screenOptions={{
         tabBarButton: (props) => (
           <TouchableOpacity activeOpacity={0.6} {...props} />
