@@ -1,7 +1,9 @@
 import React, {useReducer, useMemo} from 'react';
+import {useColorScheme} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {NavigationContainer} from '@react-navigation/native';
 
+import {DefaultTheme, DarkTheme} from '@/theme';
 import {StorageKey} from '@/type';
 import type {IAuthContext} from '@/utils/context';
 import {AuthContext} from '@/utils/context';
@@ -56,6 +58,7 @@ const AuthReducer = (prevState: AuthState, action: AuthActionType) => {
 };
 
 function App() {
+  const colorScheme = useColorScheme();
   const [authState, dispatch] = useReducer(AuthReducer, {
     isLoading: true,
     isSignout: false,
@@ -125,7 +128,8 @@ function App() {
   }
   return (
     <AuthContext.Provider value={authContext}>
-      <NavigationContainer>
+      <NavigationContainer
+        theme={colorScheme === 'light' ? DefaultTheme : DarkTheme}>
         {!authState.userToken ? <AuthStackScreen /> : <MainStackScreen />}
       </NavigationContainer>
     </AuthContext.Provider>

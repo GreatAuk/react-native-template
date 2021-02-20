@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {RouteProp} from '@react-navigation/native';
+import {RouteProp, useTheme} from '@react-navigation/native';
 
 import {MainStackParamList} from '@/router/mainStackScreen';
 import Icon from '@/components/Iconfont';
@@ -23,6 +23,7 @@ interface HomeProps {
 
 const Home: FC<HomeProps> = ({navigation, route}) => {
   const [idFromDetail, setIdFromDetail] = useState<number | undefined>();
+  const theme = useTheme();
   useEffect(() => {
     if (route.params?.id) {
       setIdFromDetail(route.params?.id);
@@ -33,7 +34,7 @@ const Home: FC<HomeProps> = ({navigation, route}) => {
   }, [route.params]);
   return (
     <View style={styles.wrap}>
-      <Text>Hello wolrd</Text>
+      <Text>is dark Theme {theme.dark ? 'Yes' : 'No'}</Text>
       <Text>id from detail: {idFromDetail}</Text>
       <Icon name="xiaoxi" />
       <Button
