@@ -4,6 +4,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp} from '@react-navigation/native';
 
 import {MainStackParamList} from '@/router/mainStackScreen';
+import Icon from '@/components/Iconfont';
 
 type NavigationProp = StackNavigationProp<MainStackParamList, 'ArticleHome'>;
 type ScreenRouteProp = RouteProp<MainStackParamList, 'ArticleDetail'>;
@@ -34,6 +35,7 @@ const Home: FC<HomeProps> = ({navigation, route}) => {
     <View style={styles.wrap}>
       <Text>Hello wolrd</Text>
       <Text>id from detail: {idFromDetail}</Text>
+      <Icon name="xiaoxi" />
       <Button
         onPress={() => navigation.navigate('ArticleDetail', {id: 11233})}
         title="Go Article Detail"

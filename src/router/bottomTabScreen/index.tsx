@@ -2,6 +2,7 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
+import Icon from '@/components/Iconfont';
 import {ArticleHomeScreen} from '@/views/article';
 import {MessageListScreen} from '@/views/message';
 import {MineHomeScreen} from '@/views/mine';
@@ -28,9 +29,9 @@ export default function BottomTabScreen() {
         component={ArticleHomeScreen}
         options={{
           tabBarLabel: '文章',
-          // tabBarIcon: ({color, size}) => (
-          //   <MaterialCommunityIcons name="bell" color={color} size={size} />
-          // ),
+          tabBarIcon: ({color, size}) => (
+            <Icon name="cheliangziliao" color={color} size={size} />
+          ),
         }}
       />
       <BottomTabs.Screen
@@ -38,9 +39,9 @@ export default function BottomTabScreen() {
         component={MessageListScreen}
         options={{
           tabBarLabel: '消息',
-          // tabBarIcon: ({color, size}) => (
-          //   <MaterialCommunityIcons name="bell" color={color} size={size} />
-          // ),
+          tabBarIcon: ({color, size}) => (
+            <Icon name="shezhi" color={color} size={size} />
+          ),
           tabBarBadge: 3,
         }}
       />
@@ -49,9 +50,9 @@ export default function BottomTabScreen() {
         component={MineHomeScreen}
         options={{
           tabBarLabel: '我的',
-          // tabBarIcon: ({color, size}) => (
-          //   <MaterialCommunityIcons name="bell" color={color} size={size} />
-          // ),
+          tabBarIcon: ({color, size}) => (
+            <Icon name="ziyuan" color={color} size={size} />
+          ),
         }}
       />
     </BottomTabs.Navigator>
