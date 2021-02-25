@@ -44,7 +44,6 @@ const AuthReducer = (prevState: AuthState, action: AuthActionType) => {
         isLoading: false,
       };
     case 'SIGN_IN':
-      console.log('[59]-App.tsx', action.payload);
       return {
         ...prevState,
         isSignout: false,

@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {Text, Button, StyleSheet, ScrollView} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {RouteProp, useTheme} from '@react-navigation/native';
 
@@ -33,7 +33,7 @@ const Home: FC<HomeProps> = ({navigation, route}) => {
     };
   }, [route.params]);
   return (
-    <View style={styles.wrap}>
+    <ScrollView contentContainerStyle={styles.wrap}>
       <Text>is dark Theme {theme.dark ? 'Yes' : 'No'}</Text>
       <Text>id from detail: {idFromDetail}</Text>
       <Icon name="xiaoxi" />
@@ -53,7 +53,19 @@ const Home: FC<HomeProps> = ({navigation, route}) => {
         onPress={() => navigation.navigate('MobxTest1')}
         title="Go MobxTest1"
       />
-    </View>
+      <Button
+        onPress={() => navigation.navigate('TabViewBasic')}
+        title="Go TabViewBasic"
+      />
+      <Button
+        onPress={() => navigation.navigate('TabViewScrollable')}
+        title="Go TabViewScrollable"
+      />
+      <Button
+        onPress={() => navigation.navigate('TabViewCustomTabbar')}
+        title="Go TabViewCustomTabbar"
+      />
+    </ScrollView>
   );
 };
 

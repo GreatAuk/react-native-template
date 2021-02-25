@@ -6,6 +6,11 @@ import BottomTabScreen, {TabParamList} from '@/router/bottomTabScreen';
 import {ArticleDetailScreen} from '@/views/article';
 import {MobxTest1, MobxTest2} from '@/views/mobx';
 import {MessageDetailScreen} from '@/views/message';
+import {
+  TabViewBasic,
+  TabViewScrollable,
+  TabViewCustomTabbar,
+} from '@/views/tabView';
 
 export type MainStackParamList = {
   BottomTabScreen: undefined;
@@ -14,6 +19,9 @@ export type MainStackParamList = {
   MessageDetail: undefined;
   MobxTest1: undefined;
   MobxTest2: undefined;
+  TabViewBasic: undefined;
+  TabViewScrollable: undefined;
+  TabViewCustomTabbar: undefined;
 } & TabParamList;
 
 const MainStack = createStackNavigator<MainStackParamList>();
@@ -46,6 +54,15 @@ const MainStackScreen = () => {
       <MainStack.Screen name="MessageDetail" component={MessageDetailScreen} />
       <MainStack.Screen name="MobxTest1" component={MobxTest1} />
       <MainStack.Screen name="MobxTest2" component={MobxTest2} />
+      <MainStack.Screen name="TabViewBasic" component={TabViewBasic} />
+      <MainStack.Screen
+        name="TabViewCustomTabbar"
+        component={TabViewCustomTabbar}
+      />
+      <MainStack.Screen
+        name="TabViewScrollable"
+        component={TabViewScrollable}
+      />
     </MainStack.Navigator>
   );
 };
